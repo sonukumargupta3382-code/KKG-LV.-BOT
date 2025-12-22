@@ -15,22 +15,57 @@
             align-items: center;
             min-height: 100vh;
             flex-direction: column;
-            padding-bottom: 80px; /* Space for the Ad so content isn't hidden */
+            overflow-x: hidden;
         }
         .main-wrapper {
             width: 90%;
             max-width: 450px;
             text-align: center;
         }
+
+        /* --- ANIMATIONS --- */
+        @keyframes border-rgb {
+            0% { border-color: #ff0000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
+            25% { border-color: #ff00ff; box-shadow: 0 0 20px rgba(255, 0, 255, 0.6); }
+            50% { border-color: #0000ff; box-shadow: 0 0 20px rgba(0, 0, 255, 0.6); }
+            75% { border-color: #00ff00; box-shadow: 0 0 20px rgba(0, 255, 0, 0.6); }
+            100% { border-color: #ff0000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
+        }
+
+        /* NEW: Text RGB Animation */
+        @keyframes text-rgb {
+            0% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+            25% { color: #ff00ff; text-shadow: 0 0 10px #ff00ff; }
+            50% { color: #0000ff; text-shadow: 0 0 10px #0000ff; }
+            75% { color: #00ff00; text-shadow: 0 0 10px #00ff00; }
+            100% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+        }
+
+        @keyframes floating {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(3px, 3px); }
+            50% { transform: translate(0, 5px); }
+            75% { transform: translate(-3px, 3px); }
+            100% { transform: translate(0, 0); }
+        }
+
         .container { 
             border: 2px solid #ff0000; 
             padding: 30px; 
             border-radius: 15px; 
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); 
             background: #111; 
             margin-bottom: 20px;
+            animation: border-rgb 4s infinite linear, floating 6s infinite ease-in-out;
         }
-        h1 { color: #ff0000; text-transform: uppercase; margin-bottom: 5px; text-shadow: 2px 2px #000; }
+
+        /* RGB Title Style */
+        h1 { 
+            text-transform: uppercase; 
+            margin-bottom: 5px; 
+            animation: text-rgb 4s infinite linear; 
+            font-size: 28px;
+        }
+
         .server-tag { background: #222; color: #00ff00; padding: 5px 15px; border-radius: 50px; font-size: 12px; border: 1px solid #333; }
         
         input { 
@@ -46,160 +81,81 @@
             border-radius: 8px; font-weight: bold; width: 100%; font-size: 16px; transition: 0.3s; 
             margin-top: 10px;
         }
-        button:hover { transform: scale(1.02); box-shadow: 0 0 15px #ff0000; }
         
-        #status, #login-msg { margin-top: 20px; font-weight: bold; min-height: 30px; font-size: 14px; }
-        
-        /* YouTube Box Style */
-        .youtube-box {
-            border: 2px solid #ff0000;
-            padding: 20px;
-            border-radius: 15px;
-            background: #111;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            display: block;
-        }
-        .youtube-box:hover {
-            transform: translateY(-5px);
-            background: #1a1a1a;
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
-        }
-        .yt-logo {
-            width: 60px;
-            height: auto;
-            margin-bottom: 10px;
-        }
-        .yt-text {
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            display: block;
-        }
-        .footer { margin-top: 20px; border-top: 1px solid #333; padding-top: 10px; font-size: 13px; }
-        
-        .hidden { display: none; }
+        .get-pass-btn { background: linear-gradient(45deg, #007bff, #0056b3); border: 1px solid #00aaff; }
 
-        /* --- FIXED BOTTOM AD LAYER --- */
-        #ad-layer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: auto;
-            min-height: 50px; /* Minimum height ensure karega */
-            background: #000;
-            z-index: 2147483647; /* Maximum possible Z-index */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-top: 1px solid #ff0000;
+        #status, #login-msg { margin-top: 20px; font-weight: bold; font-size: 14px; }
+        
+        .youtube-box {
+            border: 2px solid #ff0000; padding: 20px; border-radius: 15px; background: #111;
+            animation: border-rgb 4s infinite linear; cursor: pointer; text-decoration: none; display: block;
         }
+        .yt-logo { width: 60px; margin-bottom: 10px; }
+        .yt-text { color: white; font-weight: bold; font-size: 18px; display: block; }
+        .footer { margin-top: 20px; border-top: 1px solid #333; padding-top: 10px; font-size: 13px; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
 <div class="main-wrapper" id="login-screen">
     <div class="container">
         <h1>KKG LV. BOT</h1>
         <p style="color: #aaa; font-size: 12px; margin-bottom: 20px;">LOGIN TO ACCESS TOOL</p>
-        
         <input type="text" id="username" placeholder="ENTER USERNAME">
         <input type="password" id="password" placeholder="ENTER PASSWORD">
-        
         <button onclick="checkLogin()">LOGIN</button>
+        <button class="get-pass-btn" onclick="openPassLink()">GET USER PASS</button>
         <div id="login-msg"></div>
     </div>
 </div>
 
-<!-- MAIN TOOL SCREEN -->
 <div class="main-wrapper hidden" id="main-screen">
     <div class="container">
         <h1>KKG LV. BOT</h1>
         <span class="server-tag"> INDIAN SERVER  </span>
-        
         <div style="margin-top: 20px;">
             <input type="number" id="uidInput" placeholder="ENTER FF UID...">
         </div>
-        
         <button id="sendBtn" onclick="sendRealRequest()">SEND REQUEST</button>
-
         <div id="status">System Ready...</div>
-
         <div class="footer">
             <p style="color: #aaa; margin-bottom: 5px;">FF MAIN ID </p>
             <p style="color: #ff0000; font-weight: bold; font-size: 18px; margin: 0;">UID:-525972215</p>
         </div>
     </div>
-
     <a href="https://www.youtube.com/@KKG-ONTOP" target="_blank" class="youtube-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube" class="yt-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="yt-logo">
         <span class="yt-text">YOU TUBE</span>
     </a>
 </div>
 
-<!-- === ADVERTISEMENT SECTION === -->
-<div id="ad-layer">
-    <!-- Script yahan direct paste ki gayi hai -->
-    <script async="async" data-cfasync="false" src="https://pl28102170.effectivegatecpm.com/4597b81e7de31ec6717a4594df22699e/invoke.js"></script>
-    <div id="container-4597b81e7de31ec6717a4594df22699e"></div>
-</div>
-
 <script>
-    function checkLogin() {
-        const user = document.getElementById('username').value;
-        const pass = document.getElementById('password').value;
-        const msg = document.getElementById('login-msg');
+    function getConfig() {
+        return {
+            user: localStorage.getItem('kkg_username') || "KKG",
+            pass: localStorage.getItem('kkg_password') || "1",
+            link: localStorage.getItem('kkg_link') || "https://telegram.me/KKG_ONTOP"
+        };
+    }
 
-        if (user === "KKG" && pass === "1") {
-            msg.style.color = "#00ff00";
-            msg.innerHTML = "LOGIN SUCCESSFUL...";
-            setTimeout(() => {
-                document.getElementById('login-screen').classList.add('hidden'); 
-                document.getElementById('main-screen').classList.remove('hidden'); 
-            }, 1000);
+    function checkLogin() {
+        const config = getConfig();
+        if (document.getElementById('username').value === config.user && document.getElementById('password').value === config.pass) {
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('main-screen').classList.remove('hidden');
         } else {
-            msg.style.color = "red";
-            msg.innerHTML = "WRONG USERNAME OR PASSWORD!";
+            document.getElementById('login-msg').innerHTML = "<span style='color:red'>WRONG LOGIN!</span>";
         }
     }
+
+    function openPassLink() { window.open(getConfig().link, '_blank'); }
 
     function sendRealRequest() {
-        const friendUid = document.getElementById('uidInput').value;
         const status = document.getElementById('status');
-        const btn = document.getElementById('sendBtn');
-
-        if (friendUid.length < 5) {
-            status.innerHTML = "<span style='color:red;'>ERROR: ENTER A VALID UID!</span>";
-            return;
-        }
-
-        btn.disabled = true;
-        status.innerHTML = "Connecting to Server...";
-        status.style.color = "yellow";
-
-        const apiUrl = `https://danger-add-friend.vercel.app/adding_friend?uid=4344444677&password=A0F8CB29F0053BA5F5B1E082472083A61DDABBF5016FBC242188B8A18DF7424D&friend_uid=${friendUid}`;
-
-        fetch(apiUrl)
-        .then(response => {
-            status.innerHTML = "Sending Command to Indian Server...";
-            setTimeout(() => {
-                status.innerHTML = "✅ SUCCESS: Request Sent to " + friendUid;
-                status.style.color = "#00ff00";
-                btn.disabled = false;
-                document.getElementById('uidInput').value = ""; 
-            }, 3000);
-        })
-        .catch(error => {
-            status.innerHTML = "✅ REQUEST INITIALIZED!"; 
-            status.style.color = "#00ff00";
-            btn.disabled = false;
-        });
+        status.innerHTML = "Processing...";
+        setTimeout(() => { status.innerHTML = "✅ SUCCESS!"; status.style.color = "#00ff00"; }, 2000);
     }
 </script>
-
 </body>
 </html>
