@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KKG LV BOT - Login</title>
+    <style>
+        body { 
+            background-color: #0a0a0a; 
+            color: #fff; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            padding-bottom: 80px; /* Space for the Ad so content isn't hidden */
+        }
+        .main-wrapper {
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+        }
+        .container { 
+            border: 2px solid #ff0000; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); 
+            background: #111; 
+            margin-bottom: 20px;
+        }
+        h1 { color: #ff0000; text-transform: uppercase; margin-bottom: 5px; text-shadow: 2px 2px #000; }
+        .server-tag { background: #222; color: #00ff00; padding: 5px 15px; border-radius: 50px; font-size: 12px; border: 1px solid #333; }
+        
+        input { 
+            width: 90%; padding: 15px; margin: 10px 0; border-radius: 8px; 
+            border: 1px solid #ff0000; background: #1a1a1a; color: #fff; 
+            text-align: center; font-size: 18px; 
+            box-sizing: border-box; 
+        }
+        
+        button { 
+            background: linear-gradient(45deg, #ff0000, #990000); 
+            color: white; border: none; padding: 15px; cursor: pointer; 
+            border-radius: 8px; font-weight: bold; width: 100%; font-size: 16px; transition: 0.3s; 
+            margin-top: 10px;
+        }
+        button:hover { transform: scale(1.02); box-shadow: 0 0 15px #ff0000; }
+        
+        #status, #login-msg { margin-top: 20px; font-weight: bold; min-height: 30px; font-size: 14px; }
+        
+        /* YouTube Box Style */
+        .youtube-box {
+            border: 2px solid #ff0000;
+            padding: 20px;
+            border-radius: 15px;
+            background: #111;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: block;
+        }
+        .youtube-box:hover {
+            transform: translateY(-5px);
+            background: #1a1a1a;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+        }
+        .yt-logo {
+            width: 60px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .yt-text {
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            display: block;
+        }
+        .footer { margin-top: 20px; border-top: 1px solid #333; padding-top: 10px; font-size: 13px; }
+        
+        .hidden { display: none; }
+
+        /* --- FIXED BOTTOM AD LAYER --- */
+        #ad-layer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            min-height: 50px; /* Minimum height ensure karega */
+            background: #000;
+            z-index: 2147483647; /* Maximum possible Z-index */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="main-wrapper" id="login-screen">
+    <div class="container">
+        <h1>KKG LV. BOT</h1>
+        <p style="color: #aaa; font-size: 12px; margin-bottom: 20px;">LOGIN TO ACCESS TOOL</p>
+        
+        <input type="text" id="username" placeholder="ENTER USERNAME">
+        <input type="password" id="password" placeholder="ENTER PASSWORD">
+        
+        <button onclick="checkLogin()">LOGIN</button>
+        <div id="login-msg"></div>
+    </div>
+</div>
+
+<!-- MAIN TOOL SCREEN -->
+<div class="main-wrapper hidden" id="main-screen">
+    <div class="container">
+        <h1>KKG LV. BOT</h1>
+        <span class="server-tag"> INDIAN SERVER  </span>
+        
+        <div style="margin-top: 20px;">
+            <input type="number" id="uidInput" placeholder="ENTER FF UID...">
+        </div>
+        
+        <button id="sendBtn" onclick="sendRealRequest()">SEND REQUEST</button>
+
+        <div id="status">System Ready...</div>
+
+        <div class="footer">
+            <p style="color: #aaa; margin-bottom: 5px;">FF MAIN ID </p>
+            <p style="color: #ff0000; font-weight: bold; font-size: 18px; margin: 0;">UID:-525972215</p>
+        </div>
+    </div>
+
+    <a href="https://www.youtube.com/@KKG-ONTOP" target="_blank" class="youtube-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube" class="yt-logo">
+        <span class="yt-text">YOU TUBE</span>
+    </a>
+</div>
+
+<!-- === ADVERTISEMENT SECTION === -->
+<div id="ad-layer">
+    <!-- Script yahan direct paste ki gayi hai -->
+    <script async="async" data-cfasync="false" src="https://pl28102170.effectivegatecpm.com/4597b81e7de31ec6717a4594df22699e/invoke.js"></script>
+    <div id="container-4597b81e7de31ec6717a4594df22699e"></div>
+</div>
+
+<script>
+    function checkLogin() {
+        const user = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
+        const msg = document.getElementById('login-msg');
+
+        if (user === "KKG" && pass === "1") {
+            msg.style.color = "#00ff00";
+            msg.innerHTML = "LOGIN SUCCESSFUL...";
+            setTimeout(() => {
+                document.getElementById('login-screen').classList.add('hidden'); 
+                document.getElementById('main-screen').classList.remove('hidden'); 
+            }, 1000);
+        } else {
+            msg.style.color = "red";
+            msg.innerHTML = "WRONG USERNAME OR PASSWORD!";
+        }
+    }
+
+    function sendRealRequest() {
+        const friendUid = document.getElementById('uidInput').value;
+        const status = document.getElementById('status');
+        const btn = document.getElementById('sendBtn');
+
+        if (friendUid.length < 5) {
+            status.innerHTML = "<span style='color:red;'>ERROR: ENTER A VALID UID!</span>";
+            return;
+        }
+
+        btn.disabled = true;
+        status.innerHTML = "Connecting to Server...";
+        status.style.color = "yellow";
+
+        const apiUrl = `https://danger-add-friend.vercel.app/adding_friend?uid=4344444677&password=A0F8CB29F0053BA5F5B1E082472083A61DDABBF5016FBC242188B8A18DF7424D&friend_uid=${friendUid}`;
+
+        fetch(apiUrl)
+        .then(response => {
+            status.innerHTML = "Sending Command to Indian Server...";
+            setTimeout(() => {
+                status.innerHTML = "✅ SUCCESS: Request Sent to " + friendUid;
+                status.style.color = "#00ff00";
+                btn.disabled = false;
+                document.getElementById('uidInput').value = ""; 
+            }, 3000);
+        })
+        .catch(error => {
+            status.innerHTML = "✅ REQUEST INITIALIZED!"; 
+            status.style.color = "#00ff00";
+            btn.disabled = false;
+        });
+    }
+</script>
+
+</body>
+</html>
