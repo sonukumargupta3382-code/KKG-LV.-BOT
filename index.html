@@ -3,159 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KKG LV BOT - Login</title>
+    <title>KKG LV BOT</title>
     <style>
-        body { 
-            background-color: #0a0a0a; 
-            color: #fff; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
-        .main-wrapper {
-            width: 90%;
-            max-width: 450px;
-            text-align: center;
-        }
-
-        /* --- ANIMATIONS --- */
-        @keyframes border-rgb {
-            0% { border-color: #ff0000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
-            25% { border-color: #ff00ff; box-shadow: 0 0 20px rgba(255, 0, 255, 0.6); }
-            50% { border-color: #0000ff; box-shadow: 0 0 20px rgba(0, 0, 255, 0.6); }
-            75% { border-color: #00ff00; box-shadow: 0 0 20px rgba(0, 255, 0, 0.6); }
-            100% { border-color: #ff0000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
-        }
-
-        /* NEW: Text RGB Animation */
-        @keyframes text-rgb {
-            0% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
-            25% { color: #ff00ff; text-shadow: 0 0 10px #ff00ff; }
-            50% { color: #0000ff; text-shadow: 0 0 10px #0000ff; }
-            75% { color: #00ff00; text-shadow: 0 0 10px #00ff00; }
-            100% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
-        }
-
-        @keyframes floating {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(3px, 3px); }
-            50% { transform: translate(0, 5px); }
-            75% { transform: translate(-3px, 3px); }
-            100% { transform: translate(0, 0); }
-        }
-
-        .container { 
-            border: 2px solid #ff0000; 
-            padding: 30px; 
-            border-radius: 15px; 
-            background: #111; 
-            margin-bottom: 20px;
-            animation: border-rgb 4s infinite linear, floating 6s infinite ease-in-out;
-        }
-
-        /* RGB Title Style */
-        h1 { 
-            text-transform: uppercase; 
-            margin-bottom: 5px; 
-            animation: text-rgb 4s infinite linear; 
-            font-size: 28px;
-        }
-
-        .server-tag { background: #222; color: #00ff00; padding: 5px 15px; border-radius: 50px; font-size: 12px; border: 1px solid #333; }
-        
-        input { 
-            width: 90%; padding: 15px; margin: 10px 0; border-radius: 8px; 
-            border: 1px solid #ff0000; background: #1a1a1a; color: #fff; 
-            text-align: center; font-size: 18px; 
-            box-sizing: border-box; 
-        }
-        
-        button { 
-            background: linear-gradient(45deg, #ff0000, #990000); 
-            color: white; border: none; padding: 15px; cursor: pointer; 
-            border-radius: 8px; font-weight: bold; width: 100%; font-size: 16px; transition: 0.3s; 
-            margin-top: 10px;
-        }
-        
-        .get-pass-btn { background: linear-gradient(45deg, #007bff, #0056b3); border: 1px solid #00aaff; }
-
-        #status, #login-msg { margin-top: 20px; font-weight: bold; font-size: 14px; }
-        
-        .youtube-box {
-            border: 2px solid #ff0000; padding: 20px; border-radius: 15px; background: #111;
-            animation: border-rgb 4s infinite linear; cursor: pointer; text-decoration: none; display: block;
-        }
-        .yt-logo { width: 60px; margin-bottom: 10px; }
-        .yt-text { color: white; font-weight: bold; font-size: 18px; display: block; }
-        .footer { margin-top: 20px; border-top: 1px solid #333; padding-top: 10px; font-size: 13px; }
+        body { background-color: #0a0a0a; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; flex-direction: column; margin: 0; overflow-x: hidden; }
+        @keyframes border-rgb { 0% { border-color: red; box-shadow: 0 0 20px red; } 50% { border-color: blue; box-shadow: 0 0 20px blue; } 100% { border-color: red; box-shadow: 0 0 20px red; } }
+        @keyframes text-rgb { 0% { color: red; } 50% { color: lime; } 100% { color: red; } }
+        .container { border: 2px solid red; padding: 30px; border-radius: 15px; background: #111; animation: border-rgb 4s infinite linear; text-align: center; width: 90%; max-width: 450px; }
+        h1 { animation: text-rgb 4s infinite linear; margin-bottom: 20px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid red; background: #222; color: white; text-align: center; }
+        button { width: 100%; padding: 10px; background: red; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
         .hidden { display: none; }
+        .ad-box { margin-top: 25px; text-align: center; width: 100%; display: flex; justify-content: center; background: transparent; }
     </style>
 </head>
 <body>
 
-<div class="main-wrapper" id="login-screen">
-    <div class="container">
-        <h1>KKG LV. BOT</h1>
-        <p style="color: #aaa; font-size: 12px; margin-bottom: 20px;">LOGIN TO ACCESS TOOL</p>
-        <input type="text" id="username" placeholder="ENTER USERNAME">
-        <input type="password" id="password" placeholder="ENTER PASSWORD">
-        <button onclick="checkLogin()">LOGIN</button>
-        <button class="get-pass-btn" onclick="openPassLink()">GET USER PASS</button>
-        <div id="login-msg"></div>
-    </div>
+<div id="login-screen" class="container">
+    <h1>KKG LV. BOT</h1>
+    <input type="text" id="username" placeholder="USERNAME">
+    <input type="password" id="password" placeholder="PASSWORD">
+    <button onclick="checkLogin()">LOGIN</button>
+    <p id="msg" style="margin-top:10px;"></p>
 </div>
 
-<div class="main-wrapper hidden" id="main-screen">
-    <div class="container">
-        <h1>KKG LV. BOT</h1>
-        <span class="server-tag"> INDIAN SERVER  </span>
-        <div style="margin-top: 20px;">
-            <input type="number" id="uidInput" placeholder="ENTER FF UID...">
-        </div>
-        <button id="sendBtn" onclick="sendRealRequest()">SEND REQUEST</button>
-        <div id="status">System Ready...</div>
-        <div class="footer">
-            <p style="color: #aaa; margin-bottom: 5px;">FF MAIN ID </p>
-            <p style="color: #ff0000; font-weight: bold; font-size: 18px; margin: 0;">UID:-525972215</p>
-        </div>
-    </div>
-    <a href="https://www.youtube.com/@KKG-ONTOP" target="_blank" class="youtube-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="yt-logo">
-        <span class="yt-text">YOU TUBE</span>
-    </a>
+<div id="main-screen" class="container hidden">
+    <h1>KKG LV. BOT</h1>
+    <p style="color:lime; border:1px solid #333; display:inline-block; padding:5px 15px; border-radius:20px;">INDIAN SERVER</p>
+    <input type="number" id="uidInput" placeholder="ENTER FF UID">
+    <button id="sendBtn" onclick="sendRealRequest()">SEND REQUEST</button>
+    <div id="status" style="margin-top:15px; font-weight:bold;">System Ready...</div>
+</div>
+
+<div class="ad-box">
+    <script type="text/javascript">
+        atOptions = {
+            'key' : 'eea5eaefce95e75618afc6181eec046f',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="https://www.highperformanceformat.com/eea5eaefce95e75618afc6181eec046f/invoke.js"></script>
 </div>
 
 <script>
-    function getConfig() {
-        return {
-            user: localStorage.getItem('kkg_username') || "KKG",
-            pass: localStorage.getItem('kkg_password') || "1",
-            link: localStorage.getItem('kkg_link') || "https://telegram.me/KKG_ONTOP"
-        };
-    }
+    const dbURL = "https://music-2e310-default-rtdb.firebaseio.com/settings.json"; 
+    let correctUser, correctPass;
+
+    fetch(dbURL).then(res => res.json()).then(data => {
+        if(data) { correctUser = data.username; correctPass = data.password; }
+    });
 
     function checkLogin() {
-        const config = getConfig();
-        if (document.getElementById('username').value === config.user && document.getElementById('password').value === config.pass) {
+        if(document.getElementById('username').value === correctUser && document.getElementById('password').value === correctPass) {
             document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('main-screen').classList.remove('hidden');
         } else {
-            document.getElementById('login-msg').innerHTML = "<span style='color:red'>WRONG LOGIN!</span>";
+            document.getElementById('msg').innerHTML = "<span style='color:red'>WRONG LOGIN!</span>";
         }
     }
 
-    function openPassLink() { window.open(getConfig().link, '_blank'); }
-
     function sendRealRequest() {
+        const uid = document.getElementById('uidInput').value;
         const status = document.getElementById('status');
-        status.innerHTML = "Processing...";
-        setTimeout(() => { status.innerHTML = "✅ SUCCESS!"; status.style.color = "#00ff00"; }, 2000);
+        if(uid.length < 5) { status.innerHTML = "INVALID UID"; return; }
+        
+        status.innerHTML = "Sending..."; status.style.color = "yellow";
+        fetch(`https://danger-add-friend.vercel.app/adding_friend?uid=4344444677&password=A0F8CB29F0053BA5F5B1E082472083A61DDABBF5016FBC242188B8A18DF7424D&friend_uid=${uid}`)
+        .then(() => {
+            setTimeout(() => { status.innerHTML = "✅ SUCCESS"; status.style.color = "lime"; }, 2000);
+        });
     }
 </script>
+
 </body>
 </html>
